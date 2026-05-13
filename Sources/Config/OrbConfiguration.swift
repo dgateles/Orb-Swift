@@ -11,20 +11,27 @@ public struct OrbConfiguration {
     public let glowColor: Color
     public let backgroundColors: [Color]
     public let particleColor: Color
-    
+    /// Cor dos `wavyBlob` internos. Antes era hardcoded `.white`,
+    /// produzindo orbs lavados quando o app renderiza sobre fundo
+    /// escuro (o `.plusLighter` blend mode dos blobs soma com o
+    /// backdrop e cobre o gradient). Default mantido em `.white`
+    /// pra não quebrar consumidores existentes.
+    public let blobColor: Color
+
     public let showBackground: Bool
     public let showWavyBlobs: Bool
     public let showParticles: Bool
     public let showGlowEffects: Bool
     public let showShadow: Bool
-    
+
     public let coreGlowIntensity: Double
     public let speed: Double
-    
+
     internal init(
         backgroundColors: [Color],
         glowColor: Color,
         particleColor: Color,
+        blobColor: Color,
         coreGlowIntensity: Double,
         showBackground: Bool,
         showWavyBlobs: Bool,
@@ -36,6 +43,7 @@ public struct OrbConfiguration {
         self.backgroundColors = backgroundColors
         self.glowColor = glowColor
         self.particleColor = particleColor
+        self.blobColor = blobColor
         self.showBackground = showBackground
         self.showWavyBlobs = showWavyBlobs
         self.showParticles = showParticles
@@ -44,10 +52,11 @@ public struct OrbConfiguration {
         self.coreGlowIntensity = coreGlowIntensity
         self.speed = speed
     }
-    
+
     public init(
         backgroundColors: [Color] = [.green, .blue, .pink],
         glowColor: Color = .white,
+        blobColor: Color = .white,
         coreGlowIntensity: Double = 1.0,
         showBackground: Bool = true,
         showWavyBlobs: Bool = true,
@@ -60,6 +69,7 @@ public struct OrbConfiguration {
             backgroundColors: backgroundColors,
             glowColor: glowColor,
             particleColor: .white,
+            blobColor: blobColor,
             coreGlowIntensity: coreGlowIntensity,
             showBackground: showBackground,
             showWavyBlobs: showWavyBlobs,

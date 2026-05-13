@@ -101,7 +101,11 @@ public struct OrbView: View {
         GeometryReader { geometry in
             let size = min(geometry.size.width, geometry.size.height)
 
-            RotatingGlowView(color: .white.opacity(0.75),
+            // Antes: cor hardcoded `.white.opacity(0.75)`. Agora vem
+            // de `config.blobColor` — default `.white` mantém visual
+            // upstream; consumidores podem tintar pra alinhar com o
+            // gradient e evitar lavagem sobre fundos escuros.
+            RotatingGlowView(color: config.blobColor.opacity(0.75),
                            rotationSpeed: config.speed * 1.5,
                            direction: .clockwise)
                 .mask {
@@ -118,7 +122,7 @@ public struct OrbView: View {
         GeometryReader { geometry in
             let size = min(geometry.size.width, geometry.size.height)
 
-            RotatingGlowView(color: .white,
+            RotatingGlowView(color: config.blobColor,
                            rotationSpeed: config.speed * 0.75,
                            direction: .counterClockwise)
                 .mask {
