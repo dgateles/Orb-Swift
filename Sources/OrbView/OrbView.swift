@@ -47,6 +47,15 @@ public struct OrbView: View {
             .overlay {
                 realisticInnerGlows
             }
+            // Isola os blend modes `.plusLighter` internos. Sem isso,
+            // em backdrops escuros os blobs/glows somam ao backdrop e
+            // produzem highlights muito mais intensos do que o
+            // design previa (que assume fundo claro), revelando o
+            // polígono de 6 pontos do wavyBlob como um "X" visível.
+            // Com compositingGroup, o blend é local ao buffer offscreen
+            // do orb — o resultado fica idêntico independente da cor
+            // do backdrop.
+            .compositingGroup()
             // Masking out all the effects so it forms a perfect circle
             .mask {
                 Circle()
