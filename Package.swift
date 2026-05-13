@@ -22,8 +22,14 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
+        // `path: "Sources"` agrupa todo conteúdo de Sources/ (Config,
+        // Extensions, OrbView/*) num único target `Orb`. Sem isso o
+        // SPM puro só consegue resolver via fallback "single-target →
+        // Sources/", e clients estritos como Tuist falham com
+        // "Default source path not found for target Orb".
         .target(
-            name: "Orb"
+            name: "Orb",
+            path: "Sources"
         ),
     ]
 )
