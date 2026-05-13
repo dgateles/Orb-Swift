@@ -17,6 +17,13 @@ public struct OrbConfiguration {
     /// backdrop e cobre o gradient). Default mantido em `.white`
     /// pra não quebrar consumidores existentes.
     public let blobColor: Color
+    /// Cor do realce ("outline glow") interno do orb — três circles
+    /// stroked com blur progressivo aplicados via `.overlay` em
+    /// `.plusLighter`. Antes era hardcoded em gradient `.white → .clear`,
+    /// o que sobre backdrops escuros produzia halo gigante e cobria o
+    /// orb. Esse parâmetro tinta esse realce; em backdrops escuros,
+    /// passar uma cor da família do gradient evita a lavagem.
+    public let outlineColor: Color
 
     public let showBackground: Bool
     public let showWavyBlobs: Bool
@@ -32,6 +39,7 @@ public struct OrbConfiguration {
         glowColor: Color,
         particleColor: Color,
         blobColor: Color,
+        outlineColor: Color,
         coreGlowIntensity: Double,
         showBackground: Bool,
         showWavyBlobs: Bool,
@@ -44,6 +52,7 @@ public struct OrbConfiguration {
         self.glowColor = glowColor
         self.particleColor = particleColor
         self.blobColor = blobColor
+        self.outlineColor = outlineColor
         self.showBackground = showBackground
         self.showWavyBlobs = showWavyBlobs
         self.showParticles = showParticles
@@ -57,6 +66,7 @@ public struct OrbConfiguration {
         backgroundColors: [Color] = [.green, .blue, .pink],
         glowColor: Color = .white,
         blobColor: Color = .white,
+        outlineColor: Color = .white,
         coreGlowIntensity: Double = 1.0,
         showBackground: Bool = true,
         showWavyBlobs: Bool = true,
@@ -70,6 +80,7 @@ public struct OrbConfiguration {
             glowColor: glowColor,
             particleColor: .white,
             blobColor: blobColor,
+            outlineColor: outlineColor,
             coreGlowIntensity: coreGlowIntensity,
             showBackground: showBackground,
             showWavyBlobs: showWavyBlobs,

@@ -69,7 +69,11 @@ public struct OrbView: View {
     }
 
     private var orbOutlineColor: LinearGradient {
-        LinearGradient(colors: [.white, .clear],
+        // Antes: gradient hardcoded `.white → .clear`. Agora derivado
+        // de `config.outlineColor` — default `.white` mantém visual
+        // upstream em backdrops claros; consumidores em backdrops
+        // escuros podem passar uma cor do gradient pra não lavar.
+        LinearGradient(colors: [config.outlineColor, .clear],
                        startPoint: .bottom,
                        endPoint: .top)
     }
